@@ -1,0 +1,632 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --z1: #1e3a8a;
+    --z2: #2563eb;
+    --z3: #06b6d4;
+    --z4: #059669;
+    --z5: #eab308;
+    --z6: #ea580c;
+    --z7: #dc2626;
+
+    /* Si Google Fonts no carga (sin internet) se usa system-ui */
+    --font-titulo: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-texto: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+    --gris-texto: #71717a;
+    --espacio-seccion: 28px;
+}
+
+body {
+    font-family: var(--font-texto);
+    font-weight: 400;
+    background: linear-gradient(160deg, #f4f4f5 0%, #d4d4d8 100%);
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.5;
+    color: #18181b;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Los controles de formulario no heredan la fuente por defecto */
+input, select, button {
+    font-family: inherit;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+header {
+    border-radius: 15px 15px 0 0;
+    background: #0a0a0a;
+    color: white;
+    padding: 28px 20px 24px;
+    text-align: center;
+}
+
+/* El PNG es negro sobre blanco: sobre el fondo oscuro se invierte y "screen" hace transparente el fondo */
+.logo-wrap {
+    max-width: 180px;
+    margin: 0 auto 16px;
+}
+
+.logo {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: invert(1);
+    mix-blend-mode: screen;
+}
+
+/* ---------- Jerarquía tipográfica ---------- */
+
+header h1 {
+    font-family: var(--font-titulo);
+    font-weight: 900;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    line-height: 1.15;
+}
+
+/* Títulos de sección: Montserrat 800 en mayúsculas con barra de acento a la izquierda */
+.seccion-titulo {
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.2;
+    color: #18181b;
+    border-left: 4px solid var(--acento, #18181b);
+    padding-left: 10px;
+    margin-bottom: 14px;
+}
+
+/* Etiquetas pequeñas: tarjetas, encabezados de tabla y labels de controles */
+.card-titulo,
+.pace-table th,
+.form-group label,
+.form-group .label {
+    font-family: var(--font-texto);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gris-texto);
+}
+
+/* Texto de ayuda y notas */
+.nota,
+.info-text,
+.fuente,
+.card-detalle {
+    font-family: var(--font-texto);
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--gris-texto);
+}
+
+main {
+    padding: 32px 20px;
+}
+
+.selector-panel {
+    background: #f4f4f5;
+    padding: 22px;
+    border-radius: 10px;
+    margin-bottom: var(--espacio-seccion);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label,
+.form-group .label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Controles: Inter 600 a 16px (evita el zoom automático en iPhone) */
+.select-input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid #d4d4d8;
+    border-radius: 8px;
+    background: white;
+    color: #18181b;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.select-input::placeholder {
+    font-weight: 400;
+    color: #a1a1aa;
+}
+
+select.select-input {
+    cursor: pointer;
+}
+
+.select-input:hover:not(:disabled) {
+    border-color: #71717a;
+}
+
+.select-input:focus {
+    outline: none;
+    border-color: #18181b;
+    box-shadow: 0 0 0 3px rgba(24, 24, 27, 0.15);
+}
+
+.select-input:disabled {
+    background: #e9ecef;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* Borde del selector según la zona elegida */
+.borde-z1 { border-color: var(--z1); }
+.borde-z2 { border-color: var(--z2); }
+.borde-z3 { border-color: var(--z3); }
+.borde-z4 { border-color: var(--z4); }
+.borde-z5 { border-color: var(--z5); }
+.borde-z6 { border-color: var(--z6); }
+.borde-z7 { border-color: var(--z7); }
+
+/* ---------- Buscador ---------- */
+
+.buscador-wrap {
+    position: relative;
+}
+
+.sugerencias {
+    list-style: none;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    margin-top: 4px;
+    background: white;
+    border: 1px solid #d4d4d8;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(24, 24, 27, 0.15);
+    max-height: 260px;
+    overflow-y: auto;
+    z-index: 10;
+}
+
+.sugerencias li {
+    padding: 12px 15px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border-bottom: 1px solid #f4f4f5;
+}
+
+.sugerencias li:last-child {
+    border-bottom: none;
+}
+
+.sugerencias li:hover,
+.sugerencias li.activa {
+    background: #e4e4e7;
+}
+
+.sugerencias li.sin-resultados {
+    color: var(--gris-texto);
+    font-weight: 400;
+    cursor: default;
+    font-style: italic;
+}
+
+.sugerencias li.sin-resultados:hover {
+    background: none;
+}
+
+.sugerencias mark {
+    background: none;
+    color: #000;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* ---------- Atleta y tarjetas ---------- */
+
+.atleta-cabecera {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+    margin-bottom: var(--espacio-seccion);
+    scroll-margin-top: 12px;
+}
+
+.atleta-cabecera .badge {
+    margin: 0;
+}
+
+.atleta-nombre {
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.card {
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #fafafa;
+    border: 2px solid #e4e4e7;
+    border-left-width: 6px;
+}
+
+.card-valor {
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-size: clamp(28px, 8vw, 36px);
+    line-height: 1.15;
+    margin: 4px 0 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- Estados oficiales del test de octubre ---------- */
+/* --estado: color sólido · --estado-texto: texto sobre sólido · --estado-suave: fondo tenue · --estado-oscuro: texto sobre fondo tenue */
+.estado-mejoro { --estado: #2E9E5B; --estado-texto: #ffffff; --estado-suave: rgba(46, 158, 91, 0.14); --estado-oscuro: #1f6e3f; }
+.estado-igual { --estado: #F2D600; --estado-texto: #2b2600; --estado-suave: rgba(242, 214, 0, 0.18); --estado-oscuro: #6b5f00; }
+.estado-desmejoro { --estado: #E4302E; --estado-texto: #ffffff; --estado-suave: rgba(228, 48, 46, 0.12); --estado-oscuro: #a51d1b; }
+.estado-falta { --estado: #F5A623; --estado-texto: #3b2500; --estado-suave: rgba(245, 166, 35, 0.18); --estado-oscuro: #8a5300; }
+.estado-recuperacion { --estado: #6B3FA0; --estado-texto: #ffffff; --estado-suave: rgba(107, 63, 160, 0.14); --estado-oscuro: #4e2c78; }
+.estado-inicial { --estado: #4FB3E8; --estado-texto: #06324a; --estado-suave: rgba(79, 179, 232, 0.18); --estado-oscuro: #155e86; }
+
+.card-neutra { background: #f4f4f5; border-color: #d4d4d8; }
+.card-neutra .card-valor { color: #a1a1aa; }
+
+/* Tarjeta % con el color del estado */
+.card-estado { background: var(--estado-suave); border-color: var(--estado); }
+.card-estado .card-valor { color: var(--estado-oscuro); }
+
+/* Tarjeta de test sin resultado (NO REALIZADO, EN RECUPERACIÓN, SIN TEST PREVIO) */
+.card-solida { background: var(--estado); border-color: var(--estado); }
+.card-solida .card-titulo,
+.card-solida .card-valor,
+.card-solida .card-detalle { color: var(--estado-texto); }
+.card-solida .card-titulo { opacity: 0.85; }
+.card-solida .card-valor {
+    font-size: clamp(18px, 5vw, 22px);
+    letter-spacing: 0.5px;
+    margin: 8px 0 4px;
+}
+
+.badge {
+    display: inline-block;
+    background: var(--estado);
+    color: var(--estado-texto);
+    font-family: var(--font-texto);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin: 2px 0 6px;
+}
+
+/* Punto de color del estado en el buscador */
+.punto {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--estado, #d4d4d8);
+    margin-right: 10px;
+    vertical-align: 1px;
+    flex-shrink: 0;
+}
+
+.punto.sin-estado {
+    background: white;
+    box-shadow: inset 0 0 0 2px #a1a1aa;
+}
+
+.aviso {
+    background: #f4f4f5;
+    border: 1px solid #d4d4d8;
+    color: #18181b;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: var(--espacio-seccion);
+}
+
+.aviso-feb {
+    background: #fff4e8;
+    border-color: #F5A623;
+    border-left-width: 4px;
+    color: #9a4d06;
+    margin-bottom: 14px;
+}
+
+/* ---------- Botones de rango ---------- */
+
+/* Color de cada rango: sólido, fondo suave (20%), texto sobre sólido y texto sobre fondo suave */
+[data-rango="baja"], .rango-baja {
+    --rango: #2E9E5B;
+    --rango-suave: rgba(46, 158, 91, 0.2);
+    --rango-texto: #ffffff;
+    --rango-oscuro: #1f6e3f;
+}
+
+[data-rango="media"], .rango-media {
+    --rango: #F2B705;
+    --rango-suave: rgba(242, 183, 5, 0.2);
+    --rango-texto: #1f2937;
+    --rango-oscuro: #7a5c00;
+}
+
+[data-rango="alta"], .rango-alta {
+    --rango: #E4572E;
+    --rango-suave: rgba(228, 87, 46, 0.2);
+    --rango-texto: #ffffff;
+    --rango-oscuro: #a53716;
+}
+
+.rango-grupo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.rango-btn {
+    min-height: 48px;
+    padding: 10px 8px;
+    font-size: 16px;
+    font-weight: 600;
+    border: 2px solid var(--rango);
+    border-radius: 10px;
+    background: var(--rango-suave);
+    color: var(--rango-oscuro);
+    cursor: pointer;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.rango-btn:hover:not(:disabled):not(.activo) {
+    filter: brightness(0.95);
+    transform: translateY(-1px);
+}
+
+.rango-btn:focus-visible {
+    outline: 3px solid rgba(24, 24, 27, 0.45);
+    outline-offset: 2px;
+}
+
+.rango-btn.activo {
+    background: var(--rango);
+    color: var(--rango-texto);
+    box-shadow: 0 4px 10px rgba(24, 24, 27, 0.18);
+}
+
+.rango-btn.activo::before {
+    content: '✓ ';
+}
+
+.rango-btn:disabled {
+    background: #e9ecef;
+    border-color: #d4d4d8;
+    color: #a1a1aa;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.nota {
+    margin-top: 10px;
+}
+
+.etiqueta-completa {
+    display: inline-block;
+    background: var(--z7);
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+}
+
+/* ---------- Tabla del reloj ---------- */
+
+.reloj-panel {
+    --zona: #18181b;
+    --acento: var(--zona);
+    margin-bottom: var(--espacio-seccion);
+}
+
+.reloj-panel.zona-z1 { --zona: var(--z1); }
+.reloj-panel.zona-z2 { --zona: var(--z2); }
+.reloj-panel.zona-z3 { --zona: var(--z3); }
+.reloj-panel.zona-z4 { --zona: var(--z4); }
+.reloj-panel.zona-z5 { --zona: var(--z5); }
+.reloj-panel.zona-z6 { --zona: var(--z6); }
+.reloj-panel.zona-z7 { --zona: var(--z7); }
+
+.reloj-caja {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 2px solid var(--zona);
+}
+
+.table-container {
+    padding: 16px;
+    overflow-x: auto;
+}
+
+.pace-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.pace-table th {
+    padding: 10px 6px;
+    background: #f4f4f5;
+    border: 1px solid #d4d4d8;
+}
+
+.pace-table td {
+    padding: 14px 4px;
+    text-align: center;
+    border: 1px solid #d4d4d8;
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* Desde / Hasta: más pequeños que la zona */
+.value-cell {
+    font-size: clamp(20px, 6vw, 28px);
+    color: #52525b;
+}
+
+/* Zona: el valor principal */
+.pace-table .main-value {
+    font-size: clamp(30px, 9.5vw, 40px);
+    font-weight: 900;
+    width: 40%;
+    color: var(--zona);
+    background: #f4f4f5;
+    background: color-mix(in srgb, var(--zona) 12%, white);
+}
+
+.zona-z5 .main-value {
+    color: #a16207;
+}
+
+/* La celda "Zona" toma el color del rango seleccionado (Z7 no tiene rango y conserva el color de zona) */
+.reloj-panel[class*="rango-"] .main-value {
+    background: var(--rango-suave);
+    color: var(--rango-oscuro);
+    box-shadow: inset 0 0 0 2px var(--rango);
+}
+
+.info-text {
+    text-align: center;
+    padding: 0 20px;
+}
+
+.fuente {
+    text-align: center;
+    padding: 4px 20px 16px;
+}
+
+footer {
+    border-radius: 0 0 15px 15px;
+    background: #0a0a0a;
+    padding: 20px;
+    text-align: center;
+    color: #a1a1aa;
+    font-size: 13px;
+}
+
+/* Escritorio */
+@media (min-width: 769px) {
+    .logo-wrap {
+        max-width: 220px;
+    }
+
+    header h1 {
+        font-size: 36px;
+    }
+
+    .seccion-titulo {
+        font-size: 20px;
+    }
+
+    .atleta-nombre {
+        font-size: 28px;
+    }
+
+    main {
+        padding: 36px 32px;
+    }
+
+    .table-container {
+        padding: 20px;
+    }
+}
+
+/* Responsive para tablets */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    main {
+        padding: 28px 15px;
+    }
+
+    .selector-panel {
+        padding: 20px 15px;
+    }
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+    body {
+        padding: 5px;
+    }
+
+    header {
+        padding: 22px 15px 20px;
+    }
+
+    main {
+        padding: 24px 12px;
+    }
+
+    .selector-panel {
+        padding: 16px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    #card-mejora {
+        grid-column: 1 / -1;
+    }
+
+    .table-container {
+        padding: 10px;
+    }
+
+    footer {
+        padding: 16px;
+    }
+}

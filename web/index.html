@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zonas de paso - Team Warriors</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/favicon.png">
+    <!-- Fuentes: si no hay internet se usa system-ui (ver --font-titulo / --font-texto en styles.css) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@800;900&display=swap">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-wrap">
+                <img class="logo" src="assets/logo-warriors.png" alt="Team Warriors – Venciendo tus límites">
+            </div>
+            <h1>Zonas de Paso – Test 20'</h1>
+        </header>
+
+        <main>
+            <section class="selector-panel">
+                <div class="form-group buscador-wrap">
+                    <label for="buscador">Busca tu nombre o apellido:</label>
+                    <input id="buscador" class="select-input" type="search" autocomplete="off"
+                           placeholder="Escribe al menos 2 letras…"
+                           role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="sugerencias">
+                    <ul id="sugerencias" class="sugerencias" role="listbox" hidden></ul>
+                </div>
+            </section>
+
+            <section id="panel-atleta" hidden>
+                <div id="atleta-cabecera" class="atleta-cabecera">
+                    <h2 id="atleta-nombre" class="atleta-nombre"></h2>
+                    <span id="atleta-badge" class="badge"></span>
+                </div>
+
+                <p id="sin-datos" class="aviso" hidden>Sin datos de test disponibles</p>
+
+                <div id="zona-seccion">
+                    <h3 class="seccion-titulo">Selecciona zona</h3>
+                    <p id="aviso-feb" class="aviso aviso-feb" hidden>Ritmos basados en el test de febrero 2026</p>
+                    <div id="zona-panel" class="selector-panel">
+                        <div class="form-group">
+                            <label for="zona-select">Zona:</label>
+                            <select id="zona-select" class="select-input">
+                                <option value="">-- Seleccione una zona --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="label">Rango:</span>
+                            <div class="rango-grupo" role="group" aria-label="Rango dentro de la zona">
+                                <button type="button" class="rango-btn" data-rango="baja">Baja</button>
+                                <button type="button" class="rango-btn" data-rango="media">Media</button>
+                                <button type="button" class="rango-btn" data-rango="alta">Alta</button>
+                            </div>
+                            <p id="z7-nota" class="nota" hidden><span class="etiqueta-completa">Zona completa</span>La Zona 7 no tiene rango: se usa su valor único.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="reloj-panel" class="reloj-panel" hidden>
+                    <h3 class="seccion-titulo">Rangos para configurar reloj</h3>
+                    <div class="reloj-caja">
+                        <div class="table-container">
+                            <table class="pace-table">
+                                <thead>
+                                    <tr>
+                                        <th>Desde</th>
+                                        <th>Zona</th>
+                                        <th>Hasta</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="value-cell" id="lim-menos">-</td>
+                                        <td class="value-cell main-value" id="lim-zona">-</td>
+                                        <td class="value-cell" id="lim-mas">-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="info-text">Ritmos en mm:ss /km</p>
+                        <p id="reloj-fuente" class="fuente"></p>
+                    </div>
+                </div>
+
+                <div id="comparacion-seccion">
+                    <h3 class="seccion-titulo">Comparación de tests</h3>
+                    <div class="cards">
+                        <div class="card" id="card-feb">
+                            <div class="card-titulo"></div>
+                            <div class="card-valor"></div>
+                            <div class="card-detalle"></div>
+                        </div>
+                        <div class="card" id="card-oct">
+                            <div class="card-titulo"></div>
+                            <div class="card-valor"></div>
+                            <div class="card-detalle"></div>
+                        </div>
+                        <div class="card" id="card-mejora">
+                            <div class="card-titulo">% de mejora</div>
+                            <div class="card-valor"></div>
+                            <div class="card-badge"></div>
+                            <div class="card-detalle"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Club Deportivo Team Warriors</p>
+        </footer>
+    </div>
+
+    <script src="data/tests.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
