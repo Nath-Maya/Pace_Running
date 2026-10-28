@@ -223,8 +223,8 @@ function seleccionarAtleta(atleta) {
     cerrarSugerencias();
     $('buscador').blur();
     pintarAtleta();
-    // Lleva al usuario a la selección de zona (con el nombre del atleta visible arriba)
-    $('atleta-cabecera').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    // Lleva al usuario a la selección de zona
+    $('panel-atleta').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ---------- Comparación de tests ----------
@@ -232,15 +232,10 @@ function seleccionarAtleta(atleta) {
 function pintarAtleta() {
     const atleta = estado.atleta;
     $('panel-atleta').hidden = false;
-    $('atleta-nombre').textContent = atleta.nombre;
 
     const feb = atleta.tests[TEST_FEB];
     const oct = atleta.tests[TEST_OCT];
     const estadoOct = atleta.estadoOct || estadoAutomatico(feb, oct);
-
-    const badgeAtleta = $('atleta-badge');
-    badgeAtleta.className = `badge ${ESTADOS[estadoOct].clase}`;
-    badgeAtleta.textContent = ESTADOS[estadoOct].badge;
 
     pintarTarjetaTest('card-feb', `Test ${TEST_INFO[TEST_FEB].etiqueta}`, feb, estadoOct === 'INICIAL'
         ? { valor: 'SIN TEST PREVIO', detalle: 'Primer test en octubre', clase: 'card-solida estado-inicial' }

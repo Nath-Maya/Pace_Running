@@ -248,24 +248,8 @@ select.select-input {
 
 /* ---------- Atleta y tarjetas ---------- */
 
-.atleta-cabecera {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px 12px;
-    margin-bottom: var(--espacio-seccion);
+#panel-atleta {
     scroll-margin-top: 12px;
-}
-
-.atleta-cabecera .badge {
-    margin: 0;
-}
-
-.atleta-nombre {
-    font-family: var(--font-titulo);
-    font-weight: 800;
-    font-size: 24px;
-    line-height: 1.2;
 }
 
 .cards {
@@ -289,6 +273,43 @@ select.select-input {
     line-height: 1.15;
     margin: 4px 0 2px;
     font-variant-numeric: tabular-nums;
+}
+
+/* Comparación de tests compacta (~40% más pequeña que el tamaño original de las tarjetas) */
+#comparacion-seccion .cards {
+    gap: 7px;
+}
+
+#comparacion-seccion .card {
+    padding: 8px 9px;
+    border-radius: 7px;
+    border-left-width: 3px;
+}
+
+#comparacion-seccion .card-titulo {
+    font-size: 9px;
+    letter-spacing: 0.8px;
+}
+
+#comparacion-seccion .card-valor {
+    font-size: clamp(17px, 4.8vw, 21px);
+    margin: 2px 0 1px;
+}
+
+#comparacion-seccion .card-solida .card-valor {
+    font-size: clamp(11px, 3vw, 13px);
+    margin: 4px 0 2px;
+}
+
+#comparacion-seccion .card-detalle {
+    font-size: 10px;
+    line-height: 1.35;
+}
+
+#comparacion-seccion .badge {
+    font-size: 9px;
+    padding: 2px 7px;
+    margin: 1px 0 3px;
 }
 
 /* ---------- Estados oficiales del test de octubre ---------- */
@@ -566,10 +587,6 @@ footer {
 
     .seccion-titulo {
         font-size: 20px;
-    }
-
-    .atleta-nombre {
-        font-size: 28px;
     }
 
     main {
