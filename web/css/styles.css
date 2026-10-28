@@ -164,6 +164,15 @@ select.select-input {
     cursor: pointer;
 }
 
+/* Placeholder "-- Seleccione una zona --" en rojo (required + opción vacía = :invalid) */
+select.select-input:invalid {
+    color: #dc2626;
+}
+
+select.select-input option {
+    color: #18181b;
+}
+
 .select-input:hover:not(:disabled) {
     border-color: #71717a;
 }
