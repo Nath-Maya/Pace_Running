@@ -189,6 +189,27 @@ select.select-input option {
     opacity: 0.6;
 }
 
+/* Frase "Tu Zona X va desde Y a Z" bajo el selector de zona */
+.zona-resumen {
+    --zona: #18181b;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border-left: 4px solid var(--zona);
+    border-radius: 8px;
+    background: white;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: #18181b;
+}
+
+.zona-resumen strong {
+    font-family: var(--font-titulo);
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    color: var(--zona);
+}
+
 /* Borde del selector según la zona elegida */
 .borde-z1 { border-color: var(--z1); }
 .borde-z2 { border-color: var(--z2); }

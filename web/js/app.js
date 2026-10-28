@@ -345,10 +345,12 @@ function pintarZona() {
     const idTest = estado.atleta && testMasReciente(estado.atleta);
     if (!estado.zona || !idTest) {
         $('reloj-panel').hidden = true;
+        $('zona-resumen').hidden = true;
         return;
     }
 
     const zonas = estado.atleta.tests[idTest].zonas[estado.zona];
+    pintarResumenZona(zonas, esZ7);
     let segundos, rangoTexto;
     if (esZ7) {
         segundos = toSeconds(zonas.valor);
@@ -369,6 +371,26 @@ function pintarZona() {
     $('lim-mas').textContent = toMMSS(segundos + 5);
     $('reloj-fuente').textContent =
         `${estado.atleta.nombre} · ${zonaInfo.nombre} · ${rangoTexto} · ${TEST_INFO[idTest].nombreLargo}`;
+}
+
+// "Tu Zona X va desde Y a Z /km" con el rango completo de la zona (de baja a alta)
+function pintarResumenZona(zonas, esZ7) {
+    const resumen = $('zona-resumen');
+    const valor = (texto) => {
+        const strong = document.createElement('strong');
+        strong.textContent = texto;
+        return strong;
+    };
+    const nombreZona = ZONAS.find(z => z.id === estado.zona).nombre;
+
+    resumen.textContent = '';
+    if (esZ7) {
+        resumen.append(`Tu ${nombreZona} es de `, valor(zonas.valor), ' /km o más rápido');
+    } else {
+        resumen.append(`Tu ${nombreZona} va desde `, valor(zonas.baja), ' a ', valor(zonas.alta), ' /km');
+    }
+    resumen.style.setProperty('--zona', `var(--${estado.zona})`);
+    resumen.hidden = false;
 }
 
 // ---------- Inicio ----------
